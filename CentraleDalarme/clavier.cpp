@@ -1,5 +1,6 @@
 #include "clavier.h"
 #include "detecteur.h"
+#include "detecteurtemporise.h"
 #include "ui_clavier.h"
 #include <QMessageBox>
 #include <QTimer>
@@ -11,8 +12,6 @@ Clavier::Clavier(QWidget *parent)
     ui->setupUi(this);
     connect(ui->pushButton_0,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
     connect(ui->pushButton_1,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
-    connect(ui->pushButton_4,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
-    connect(ui->pushButton_5,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
     connect(ui->pushButton_6,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
     connect(ui->pushButton_7,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
     connect(ui->pushButton_8,&QPushButton::clicked,this,&Clavier::TraiterChiffre);
@@ -65,7 +64,7 @@ void Clavier::onTimerLed_timeout()
 void Clavier::on_pushButton_2_clicked()
 {
     if (leDetecteur == nullptr){
-    leDetecteur = new Detecteur;
+     leDetecteur = new Detecteur(this);
     leDetecteur->show();
     }
 }
@@ -80,3 +79,22 @@ void Clavier::on_pushButton_3_clicked()
     }
 }
 
+
+void Clavier::on_pushButton_4_clicked()
+{
+    if (leDetecteur == nullptr) {
+        leDetecteur = new DetecteurTemporise(this);
+        leDetecteur->show();
+    }
+}
+
+
+void Clavier::on_pushButton_5_clicked()
+{
+    if (leDetecteur != nullptr) {
+        leDetecteur->hide();
+        delete leDetecteur;
+        leDetecteur = nullptr;
+}
+
+}

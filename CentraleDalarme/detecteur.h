@@ -14,7 +14,10 @@ public:
     explicit Detecteur(QWidget *parent = nullptr);
     ~Detecteur();
 
-private:
+private slots:
+    void on_pushButtonIntrus_clicked();
+
+protected:
     Ui::Detecteur *ui;
 };
 
